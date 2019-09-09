@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<filesCheck>
+	<file id="0">
+		<url>/ppmpapp/ppmp/apache-tomcat-7.0.62</url>
+		<filename>tingyun-agent-java1.6.zip</filename>
+	</file>
+	<file id="1">
+		<url>/ppmpapp/ppmp/apache-tomcat-7.0.62/OneAPM</url>
+		<filename>oneapm.jar</filename>
+		<filename>twoapm.jar</filename>
+	</file>
+</filesCheck>
