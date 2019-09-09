@@ -117,6 +117,12 @@
             <version>1.2.15</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -146,25 +152,7 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>cmsz</id>
-            <name>CMSZ dev</name>
-            <url>http://192.168.59.185:8081/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <!--由于SNAPSHOT版本不稳定，需要持续发布，在不改变版本的情况下，需要持续获取最新的依赖jar，所以根据需求配置获取频率。 配置对于SNAPSHOT版本向远程仓库中查找的频率,频率共有四种，分别是always、daily、interval、never,默认daily。
-                   当本地仓库中存在需要的依赖项目时，always是每次都去远程仓库查看是否有更新，daily是只在第一次的时候查看是否有更新，当天的其它时候则不会查看；
-                   interval允许设置一个分钟为单位的间隔时间(用法：interval:XX(XX是间隔分钟数))，在这个间隔时间内只会去远程仓库中查找一次，never是不会去远程仓库中查找 -->
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <!--
+   
         <repositories>
             <repository>
                 <id>public</id>
@@ -188,7 +176,7 @@
                 </snapshots>
             </pluginRepository>
         </pluginRepositories>
-        -->
+   
 
 
 </project>

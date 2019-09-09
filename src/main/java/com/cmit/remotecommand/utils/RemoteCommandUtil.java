@@ -1,11 +1,13 @@
-package com.cmit.remoteCommand.utils;
+package com.cmit.remotecommand.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,9 +22,9 @@ import org.springframework.stereotype.Service;
  * @date :   2019-09-05
  * @description :
  */
+@Slf4j
 @Service
 public class RemoteCommandUtil {
-    private static final Logger log = LoggerFactory.getLogger(RemoteCommandUtil.class);
     private static String  DEFAULTCHART="UTF-8";
 
     /**
@@ -61,15 +63,15 @@ public class RemoteCommandUtil {
      * @author: wuniting
      * @date:
      */
-    public static String execute(Connection conn,String cmd){
-        String result="";
+    public static ArrayList<String> execute(Connection conn,String cmd){
+        ArrayList<String> result = new ArrayList<>();
         try {
             if(conn !=null){
                 Session session= conn.openSession();//打开一个会话
                 session.execCommand(cmd);//执行命令
                 result=processStdout(session.getStdout(),DEFAULTCHART);
                 //如果为得到标准输出为空，说明脚本执行出错了
-                if(StringUtils.isBlank(result)){
+                if(result.isEmpty()){
                     log.info("得到标准输出为空,链接conn:"+conn+",执行的命令："+cmd);
                     result=processStdout(session.getStderr(),DEFAULTCHART);
                 }else{
@@ -79,8 +81,7 @@ public class RemoteCommandUtil {
                 session.close();
             }
         } catch (IOException e) {
-            log.info("执行命令失败,链接conn:"+conn+",执行的命令："+cmd+"  "+e.getMessage());
-            e.printStackTrace();
+            log.error("执行命令失败,链接conn:"+conn+",执行的命令："+cmd+"  "+e.getMessage(), e);
         }
         return result;
     }
@@ -93,14 +94,16 @@ public class RemoteCommandUtil {
      * @author: wuniting
      * @date:
      */
-    private static String processStdout(InputStream in, String charset){
+    private static ArrayList<String> processStdout(InputStream in, String charset){
         InputStream stdout = new StreamGobbler(in);
-        StringBuffer buffer = new StringBuffer();;
+//        StringBuffer buffer = new StringBuffer();
+        ArrayList<String> arrayList = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(stdout,charset));
             String line=null;
             while((line=br.readLine()) != null){
-                buffer.append(line+"\n");
+//                buffer.append(line+"\n");
+                arrayList.add(line);
             }
         } catch (UnsupportedEncodingException e) {
             log.error("解析脚本出错："+e.getMessage());
@@ -109,7 +112,8 @@ public class RemoteCommandUtil {
             log.error("解析脚本出错："+e.getMessage());
             e.printStackTrace();
         }
-        return buffer.toString();
+//        return buffer.toString();
+        return arrayList;
     }
 
 }

@@ -1,8 +1,9 @@
-package com.cmit.remoteCommand.controller;
+package com.cmit.remotecommand.controller;
 
 import ch.ethz.ssh2.Connection;
-import com.cmit.remoteCommand.utils.RemoteCommandUtil;
-import com.cmit.remoteCommand.utils.XMLReaderUtil;
+import com.cmit.remotecommand.config.RemoteHostProperties;
+import com.cmit.remotecommand.utils.RemoteCommandUtil;
+import com.cmit.remotecommand.utils.XMLReaderUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,11 +22,14 @@ public class RemoteCommandController {
     @Autowired
     private XMLReaderUtil xmlReaderUtil;
 
+    @Autowired
+    private RemoteHostProperties properties;
+
     @RequestMapping(value = "/login", method = {RequestMethod.GET})
     public  void loginTest(){
 
-//        Connection conn = remoteCommandUtil.login("192.168.122.179", "mcbadm", "Tqh_R4s58#d9");
-//        String result1 = remoteCommandUtil.execute(conn,"ls /ppmpapp/ppmp/apache-tomcat-7.0.62");
+//        Connection conn = remoteCommandUtil.login(properties.getHostname(), properties.getUsername(), properties.getPassword());
+//        String result1 = remoteCommandUtil.execute(conn,"ls /home/Vander/apps/");
 //        System.out.println("执行结果：" + result1);
 //        String result2 = remoteCommandUtil.execute(conn,"cksum /ppmpapp/ppmp/apache-tomcat-7.0.62/tingyun-agent-java1.6.zip");
 //        System.out.println("执行结果：" + result2);
@@ -36,6 +40,7 @@ public class RemoteCommandController {
         try{
             xmlReaderUtil.XMLRead();
         }catch (Exception e){
+            e.printStackTrace();
             System.out.println("xml文件读取异常");
         }
 
