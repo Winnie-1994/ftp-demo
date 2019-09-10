@@ -1,4 +1,4 @@
-package com.cmit.remotecommand.config;
+package com.cmit.filecheck.config;
 
 import lombok.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author : Vander
+ * @author : wuniting
  * @date :   2019/9/9
  * @description :
  */

@@ -1,4 +1,4 @@
-package com.cmit.remotecommand.utils;
+package com.cmit.filecheck.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -8,9 +8,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;
@@ -35,7 +32,7 @@ public class RemoteCommandUtil {
      * @author: wuniting
      * @date:
      */
-    public static Connection login(String ip, String userName, String userPwd){
+    public static Connection login(String ip, String userName, String userPwd, String systemName){
 
         boolean flg=false;
         Connection conn = null;
@@ -44,11 +41,11 @@ public class RemoteCommandUtil {
             conn.connect();//连接
             flg=conn.authenticateWithPassword(userName, userPwd);//认证
             if(flg){
-                log.info("=========登录成功========="+conn);
+                log.info("=========" + systemName + "登录成功========="+conn);
                 return conn;
             }
         } catch (IOException e) {
-            log.error("=========登录失败========="+e.getMessage());
+            log.error("=========" + systemName + "登录失败========="+e.getMessage());
             e.printStackTrace();
         }
         return conn;
