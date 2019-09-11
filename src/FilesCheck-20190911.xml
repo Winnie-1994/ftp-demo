@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<filesCheck>
+	<system>
+		<systemName>PMS</systemName>
+	</system>
+	<file id="0">
+		<url>/ppmpapp/</url>
+		<filename>servicegate000.war.zip</filename>
+		<fileVersion>2810433717</fileVersion>
+	</file>
+	<file id="1">
+		<url>/ppmpapp/ppmp/apache-tomcat-7.0.62/</url>
+		<filename>RUNNING.txt</filename>
+		<fileVersion>2315525843</fileVersion>
+	</file>
+	<file id="2">
+		<url>/ppmpapp/ppmp/apache-tomcat-7.0/</url>
+		<filename>RUNNING.txt</filename>
+		<fileVersion>2315525843</fileVersion>
+	</file>
+	<file id="3">
+		<url>/ppmpapp/ppmp/apache-tomcat-7.0.62/</url>
+		<filename>redis-5.0.4.tar.gz</filename>
+		<fileVersion>3006267861</fileVersion>
+	</file>
+	<file id="4">
+		<url>/ppmpapp/ppmp/apache-tomcat-7.0.62/</url>
+		<filename>RUNNING.txt</filename>
+		<fileVersion>3006267860</fileVersion>
+	</file>
+</filesCheck>

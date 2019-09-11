@@ -7,11 +7,11 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-import lombok.extern.slf4j.Slf4j;
 
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 /**
@@ -32,7 +32,7 @@ public class RemoteCommandUtil {
      * @author: wuniting
      * @date:
      */
-    public static Connection login(String ip, String userName, String userPwd, String systemName){
+    public static Connection login(String ip, String userName, String userPwd){
 
         boolean flg=false;
         Connection conn = null;
@@ -41,14 +41,18 @@ public class RemoteCommandUtil {
             conn.connect();//连接
             flg=conn.authenticateWithPassword(userName, userPwd);//认证
             if(flg){
-                log.info("=========" + systemName + "登录成功========="+conn);
+                log.info("登录成功"+conn);
+                return conn;
+            }else{
+                log.error("用户名或密码错误"+conn);
                 return conn;
             }
         } catch (IOException e) {
-            log.error("=========" + systemName + "登录失败========="+e.getMessage());
+            log.error("登录失败"+e.getMessage());
             e.printStackTrace();
+            return conn;
         }
-        return conn;
+
     }
 
 

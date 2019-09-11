@@ -38,12 +38,7 @@ public class FileCheckController {
     })
     public String fileCheck(@ApiParam(value = "xml配置文件", required = true) MultipartFile file, String hostname, String username, String password) {
         ArrayList<String> configFileMessage = fileUploadService.fileUpload(file);
-        try {
-            xmlReaderService.XMLReadandCheck(configFileMessage.get(0), configFileMessage.get(1), hostname, username, password);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("xml文件读取异常" + e);
-        }
+        xmlReaderService.XMLReadandCheck(configFileMessage.get(0), configFileMessage.get(1), hostname, username, password);
         return "执行完毕";
     }
 
